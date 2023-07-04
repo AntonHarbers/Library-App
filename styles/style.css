@@ -5,4 +5,93 @@
 body{
     background-color: #949494;
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    user-select: none;
+    padding-top: 20px;
+}
+
+.book{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.book:hover{
+    border: 1px solid azure;
+    box-shadow: 0px 0px 10px 0px azure;
+}
+
+button{
+    border-radius: 5px;
+    border: 0px solid black;
+    background-color: rgb(209, 209, 209);
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(179, 179, 179);
+}
+
+button:focus{
+    outline: none;
+    background-color: rgb(179, 179, 179);
+
+}
+
+button:active{
+    background-color: rgb(115, 115, 115);
+}
+
+.removeButton{
+    width: 50px;
+    height: 50px;
+}
+
+form{
+    position: absolute;
+    top: 30%;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+legend{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+label{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+input{
+    border-radius: 5px;
+    outline: none;
+    border: 0px solid black;
+    background-color: rgb(209, 209, 209);
+}
+
+.hidden{
+    display: none;
 }
