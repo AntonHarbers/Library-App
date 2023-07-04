@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin Library</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
-    <h1>Odin Library</h1>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <div class="content">
+      <h1>Odin Library</h1>
 
-    <button id="toggleFormButton">
-        Add Book
-    </button>
-    <div id="bookshelf">
-
-    </div>
-    <form id="addBookForm" class="hidden">
+      <button id="toggleFormButton">Add Book</button>
+      <div id="bookshelf"></div>
+      <form id="addBookForm" class="hidden">
         <legend>Add a book to your library</legend>
         <label for="name">Book Name:</label>
-        <input type="text" name="name" id="name" min="1" required placeholder="Name...">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          min="1"
+          required
+          placeholder="Name..."
+        />
         <label for="author">Book Author:</label>
-        <input type="text" name="author" id="author" required min="1" placeholder="Author...">
+        <input
+          type="text"
+          name="author"
+          id="author"
+          required
+          min="1"
+          placeholder="Author..."
+        />
         <label for="pages">Pages:</label>
-        <input type="number" name="pages" id="pages" required value="0">
+        <input type="number" name="pages" id="pages" required value="0" />
         <label for="read">Read</label>
-        <input type="checkbox" name="read" id="read">
+        <input type="checkbox" name="read" id="read" />
         <button type="submit" id="formButton">Add Book</button>
         <button id="closeFormButton">Close</button>
+      </form>
+    </div>
+    <div class="parallax"></div>
 
-    </form>
-</body>
-<script src="script.js"></script>
+  </body>
+  <script src="script.js"></script>
 </html>
