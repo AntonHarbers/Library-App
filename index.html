@@ -19,6 +19,7 @@
           type="text"
           name="name"
           id="name"
+          class="invalid"
           min="1"
           required
           placeholder="Name..."
@@ -28,16 +29,18 @@
           type="text"
           name="author"
           id="author"
+          class="invalid"
           required
           min="1"
           placeholder="Author..."
         />
         <label for="pages">Pages:</label>
-        <input type="number" name="pages" id="pages" required value="0" />
+        <input type="number" name="pages" id="pages" required value="1" min="1" max="100000000" />
         <label for="read">Read</label>
         <input type="checkbox" name="read" id="read" />
         <button type="submit" id="formButton">Add Book</button>
         <button id="closeFormButton">Close</button>
+        <span id="errorMessage" class="hidden"></span>
       </form>
     </div>
     <div class="parallax"></div>

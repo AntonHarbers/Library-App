@@ -6,6 +6,48 @@ const bookshelf = document.getElementById("bookshelf");
 
 let myLibrary = [];
 
+const bookName = document.querySelector("#name");
+const bookAuthor = document.querySelector("#author");
+const errorMessage = document.querySelector("#errorMessage");
+
+bookName.addEventListener("input", (e) => {
+  if(bookName.validity.valid){
+    bookName.classList.remove("invalid");
+    bookName.classList.add("valid");
+    hideError();
+  }else{
+    bookName.classList.remove("valid");
+    bookName.classList.add("invalid");
+    showError("Please enter a book name");
+  }
+});
+
+bookAuthor.addEventListener("input", (e) => {
+  if(bookAuthor.validity.valid){
+    bookAuthor.classList.remove("invalid");
+    bookAuthor.classList.add("valid");
+    hideError();
+  }else{
+    bookAuthor.classList.remove("valid");
+    bookAuthor.classList.add("invalid");
+    showError("Please enter an author name");
+  }
+});
+
+const showError = (message) => {
+  errorMessage.textContent = message;
+  errorMessage.classList.remove("hidden");
+}
+
+const hideError = () => {
+  errorMessage.classList.add("hidden");
+}
+
+
+
+
+
+
 document.addEventListener('scroll', function() {
   const parallax = document.querySelector('.parallax');
   let scrollPosition = window.pageYOffset;
