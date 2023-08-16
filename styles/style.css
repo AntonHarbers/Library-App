@@ -10,7 +10,7 @@ body, html {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: start; 
     align-items: center;
     height: 100vh;
     text-align: center;
@@ -24,7 +24,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(40deg, rgba(171, 5, 102, 0.655) 0%, rgb(1, 116, 137) 25%, rgb(1, 143, 36) 50%, rgb(191, 177, 25) 75%, rgb(183, 16, 111) 100%);
+    background: linear-gradient(65deg, rgba(171, 5, 102, 0.289) 0%, rgba(1, 117, 137, 0.337) 25%, rgba(1, 143, 37, 0.389) 50%, rgba(191, 177, 25, 0.437) 75%, rgba(183, 16, 111, 0.408) 100%);
     background-size: 200% 200%;
     animation: gradient-animation 6s ease infinite;    
     z-index: -1;
@@ -74,28 +74,29 @@ body, html {
     gap: 20px;
 }
 
-button{
+button {
     border-radius: 5px;
-    border: 0px solid black;
-    background-color: rgb(209, 209, 209);
+    border: none;
+    background-color: #4caf50; /* Green */
+    color: white;
     width: 200px;
     height: 50px;
     cursor: pointer;
-}
-
-button:hover{
-    background-color: rgb(179, 179, 179);
-}
-
-button:focus{
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green */
+  }
+  
+  button:focus {
     outline: none;
-    background-color: rgb(179, 179, 179);
-
-}
-
-button:active{
-    background-color: rgb(115, 115, 115);
-}
+  }
+  
+  button:active {
+    background-color: #3e8e41; /* Even darker green */
+    transform: translateY(1px);
+  }
 
 .RemoveButton{
     width: 50px;
@@ -110,15 +111,23 @@ form{
     width: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 100px;
     justify-content: center;
-    padding-right: 50px;
-    padding-left: 50px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px;
     align-items: center;
     background-color: azure;
     border-radius: 15px;
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 legend{
@@ -130,15 +139,19 @@ legend{
 label{
     font-size: 18px;
     font-weight: 500;
+    cursor: pointer;
+    
 }
 
 input{
     border-radius: 5px;
     outline: none;
     border: 0px solid black;
-    background-color: rgb(209, 209, 209);
+    background-color: rgba(255, 255, 255, 0);
     font-size: 18px;
     text-align: center;
+    width: 400px;
+    padding: 8px;
 }
 
 .hidden{
@@ -151,4 +164,35 @@ input{
 
 .invalid{
     border: 1px solid red;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 400px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    margin-right: 8px;
+    vertical-align: middle;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: #66bb6a;
+    border-color: #66bb6a;
+  }
+
+#formInfoDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formInfoItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 }

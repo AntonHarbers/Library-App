@@ -10,48 +10,40 @@ const bookName = document.querySelector("#name");
 const bookAuthor = document.querySelector("#author");
 const errorMessage = document.querySelector("#errorMessage");
 
-bookName.addEventListener("input", (e) => {
-  if(bookName.validity.valid){
-    bookName.classList.remove("invalid");
-    bookName.classList.add("valid");
+// General validation function
+function validateInput(inputElement, errorMessage) {
+  if (inputElement.validity.valid) {
+    inputElement.classList.remove("invalid");
+    inputElement.classList.add("valid");
     hideError();
-  }else{
-    bookName.classList.remove("valid");
-    bookName.classList.add("invalid");
-    showError("Please enter a book name");
+  } else {
+    inputElement.classList.remove("valid");
+    inputElement.classList.add("invalid");
+    showError(errorMessage);
   }
+}
+
+bookName.addEventListener("input", () => {
+  validateInput(bookName, "Please enter a book name");
 });
 
-bookAuthor.addEventListener("input", (e) => {
-  if(bookAuthor.validity.valid){
-    bookAuthor.classList.remove("invalid");
-    bookAuthor.classList.add("valid");
-    hideError();
-  }else{
-    bookAuthor.classList.remove("valid");
-    bookAuthor.classList.add("invalid");
-    showError("Please enter an author name");
-  }
+bookAuthor.addEventListener("input", () => {
+  validateInput(bookAuthor, "Please enter an author name");
 });
 
 const showError = (message) => {
   errorMessage.textContent = message;
   errorMessage.classList.remove("hidden");
-}
+};
 
 const hideError = () => {
   errorMessage.classList.add("hidden");
-}
+};
 
-
-
-
-
-
-document.addEventListener('scroll', function() {
-  const parallax = document.querySelector('.parallax');
+document.addEventListener("scroll", function () {
+  const parallax = document.querySelector(".parallax");
   let scrollPosition = window.pageYOffset;
-  parallax.style.backgroundPosition = '0' + ' ' + (scrollPosition * 0.5) + 'px';
+  parallax.style.backgroundPosition = "0" + " " + scrollPosition * 0.5 + "px";
 });
 
 function Book(title, author, pages, read) {
@@ -73,7 +65,7 @@ function addBookToLibrary(book) {
 
 function paintBookshelf() {
   bookshelf.innerHTML = "";
-  for (let i = 0; i < myLibrary.length; i++) { 
+  for (let i = 0; i < myLibrary.length; i++) {
     let element = document.createElement("div");
     element.dataset.index = i;
     element.classList.add("book");
@@ -89,29 +81,47 @@ function paintBookshelf() {
     let readToggleButton = document.createElement("button");
     readToggleButton.classList.add("ReadToggleButton");
     readToggleButton.textContent = "Toggle Read";
-    readToggleButton.addEventListener("click", (e) => {
-      // Toggle the read status
-      myLibrary[i].read = !myLibrary[i].read;
-
-      // Update the text content with the new info
-      infoElement.textContent = myLibrary[i].info();
-    });
     buttonContainer.appendChild(readToggleButton);
 
     let removeButton = document.createElement("button");
     removeButton.classList.add("RemoveButton");
     removeButton.textContent = "X";
-    removeButton.addEventListener("click", (e) => {
-      myLibrary.splice(i, 1);
-      paintBookshelf();
-    });
     buttonContainer.appendChild(removeButton);
-    
+
     bookshelf.appendChild(element);
   }
 }
 
+
 paintBookshelf();
+
+// Function to toggle read status
+function toggleReadStatus(index) {
+  myLibrary[index].read = !myLibrary[index].read;
+  paintBookshelf();
+}
+
+// Function to remove a book
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  paintBookshelf();
+}
+
+// Event listener for read toggle buttons
+bookshelf.addEventListener("click", (e) => {
+  if (e.target.classList.contains("ReadToggleButton")) {
+    const bookIndex = e.target.parentElement.parentElement.dataset.index;
+    toggleReadStatus(bookIndex);
+  }
+});
+
+// Event listener for remove buttons
+bookshelf.addEventListener("click", (e) => {
+  if (e.target.classList.contains("RemoveButton")) {
+    const bookIndex = e.target.parentElement.parentElement.dataset.index;
+    removeBook(bookIndex);
+  }
+});
 
 closeFormButton.addEventListener("click", () => {
   form.classList.toggle("hidden");
@@ -124,27 +134,35 @@ toggleFormButton.addEventListener("click", () => {
 
 formButton.addEventListener("click", (e) => {
   e.preventDefault();
-  var formData = new FormData(form); 
+  var formData = new FormData(form);
 
-  console.log(formData.get("name"));
-  console.log(formData.get("author"));
-  console.log(formData.get("pages"));
-  console.log(formData.get("read") == null ? false : true);
+  // Clear previous error messages
+  hideError();
 
   if (formData.get("name") === "") {
-    alert("Please enter a book name");
+    showError("Please enter a book name");
+    bookName.classList.remove("valid");
+    bookName.classList.add("invalid");
     return;
   }
 
   if (formData.get("author") === "") {
-    alert("Please enter an author name");
+    showError("Please enter an author name");
+    bookAuthor.classList.remove("valid");
+    bookAuthor.classList.add("invalid");
     return;
   }
 
   if (formData.get("pages") === "0") {
-    alert("Please enter a page number");
+    showError("Please enter a valid page number");
     return;
   }
+
+  // Reset input elements to an invalid state
+  bookName.classList.remove("valid");
+  bookName.classList.add("invalid");
+  bookAuthor.classList.remove("valid");
+  bookAuthor.classList.add("invalid");
 
   addBookToLibrary(
     new Book(
@@ -156,10 +174,7 @@ formButton.addEventListener("click", (e) => {
   );
 
   form.reset();
-
   form.classList.toggle("hidden");
-
   paintBookshelf();
 });
-
 
