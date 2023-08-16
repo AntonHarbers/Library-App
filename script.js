@@ -61,8 +61,32 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  saveLibraryToLocalStorage(); // Save to local storage after adding
+  paintBookshelf();
 }
 
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  saveLibraryToLocalStorage(); // Save to local storage after removing
+  paintBookshelf();
+}
+
+function toggleReadStatus(index) {
+  myLibrary[index].read = !myLibrary[index].read;
+  saveLibraryToLocalStorage(); // Save to local storage after toggling
+  paintBookshelf();
+}
+
+function saveLibraryToLocalStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function loadLibraryFromLocalStorage() {
+  const libraryData = localStorage.getItem("myLibrary");
+  if (libraryData) {
+    myLibrary = JSON.parse(libraryData);
+  }
+}
 function paintBookshelf() {
   bookshelf.innerHTML = "";
   for (let i = 0; i < myLibrary.length; i++) {
@@ -71,7 +95,9 @@ function paintBookshelf() {
     element.classList.add("book");
 
     let infoElement = document.createElement("div");
-    infoElement.textContent = myLibrary[i].info();
+    infoElement.textContent = `${myLibrary[i].title} by ${myLibrary[i].author}, ${myLibrary[i].pages} pages, ${
+      myLibrary[i].read ? "read" : "not read yet"
+    }`;
     element.appendChild(infoElement);
 
     let buttonContainer = document.createElement("div");
@@ -92,20 +118,9 @@ function paintBookshelf() {
   }
 }
 
-
+// Initialize library from local storage
+loadLibraryFromLocalStorage();
 paintBookshelf();
-
-// Function to toggle read status
-function toggleReadStatus(index) {
-  myLibrary[index].read = !myLibrary[index].read;
-  paintBookshelf();
-}
-
-// Function to remove a book
-function removeBook(index) {
-  myLibrary.splice(index, 1);
-  paintBookshelf();
-}
 
 // Event listener for read toggle buttons
 bookshelf.addEventListener("click", (e) => {
@@ -175,6 +190,5 @@ formButton.addEventListener("click", (e) => {
 
   form.reset();
   form.classList.toggle("hidden");
-  paintBookshelf();
 });
 
