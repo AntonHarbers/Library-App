@@ -1,50 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Odin Library</title>
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="shortcut icon" href="./images/favicon/favicon.ico" type="image/x-icon">
-</head>
-<body>
-  <div class="content">
-    <h1>Odin Library</h1>
+  <head>
+    <script
+      src="https://kit.fontawesome.com/61b3d69629.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odin Library</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="shortcut icon"
+      href="./images/favicon/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="content">
+      <h1>Odin Library</h1>
+      <button id="toggleFormButton">
+        <i class="fas fa-plus"></i>
+      </button>
+      <div id="bookshelf"></div>
 
-    <button id="toggleFormButton">Add Book</button>
-    <div id="bookshelf"></div>
+      <form id="addBookForm" class="hidden">
+        <fieldset>
+          <legend>Add a Book to Your Library</legend>
+          <div id="formInfoDiv">
+            <div class="formInfoItem invalid" id="nameContainer">
+              <label for="name"><span class="fa-solid fa-book"></span></label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                minlength="1"
+                required
+                placeholder="Name..."
+              />
+            </div>
+            <div class="formInfoItem invalid" id="authorContainer">
+              <label for="author"
+                ><span class="fa-solid fa-pen-nib"></span
+              ></label>
+              <input
+                type="text"
+                name="author"
+                id="author"
+                required
+                minlength="1"
+                placeholder="Author..."
+              />
+            </div>
+            <div class="formInfoItem">
+              <label for="pages"><span class="fa-solid fa-book-open"></s></label>
+              <input
+                type="number"
+                name="pages"
+                id="pages"
+                required
+                min="1"
+                max="100000"
+               placeholder="Pages..."
+              />
+            </div>
+            <div class="formInfoItem">
+              <button class="toggleReadBtn" type="button">
+                <span class="fa-solid fa-eye eye"></span>
+                <span class="fa-solid fa-eye-slash eyeClosed"></span>
+              </button>
+            </div>
+          </div>
+          <div class="formSubmitBtnContainer">
 
-    <form id="addBookForm" class="hidden">
-      <fieldset>
-        <legend>Add a Book to Your Library</legend>
-        <div id="formInfoDiv">
-          <div class="formInfoItem">
-            <label for="name">Book Name</label>
-            <input type="text" name="name" id="name" class="invalid" min="1" required placeholder="Name...">  
-          </div>
-          <div class="formInfoItem">
-            <label for="author">Book Author</label>
-            <input type="text" name="author" id="author" class="invalid" required min="1" placeholder="Author...">  
-          </div>
-          <div class="formInfoItem">
-            <label for="pages">Pages</label>
-            <input type="number" name="pages" id="pages" required value="1" min="1" max="100000">  
-          </div>
-          <div class="formInfoItem">
-            <label for="read">Read</label>
-            <input type="checkbox" name="read" id="read">
-          </div>
-        </div>
-        <div>
-          <button type="submit" id="formButton">Add Book</button>
-          <button id="closeFormButton">Close</button>
-        </div>
-        <span id="errorMessage" class="hidden"></span>
-      </fieldset>
-    </form>
-  </div>
-  <div class="parallax"></div>
+            <button type="submit" id="formButton">
+              <i class="fas fa-plus"></i>
+            </button>
 
-  <script src="script.js"></script>
-</body>
+          </div>
+          <span id="errorMessage" class="hidden"></span>
+        </fieldset>
+      </form>
+    </div>
+    <div class="parallax"></div>
+
+    <script src="script.js"></script>
+  </body>
 </html>

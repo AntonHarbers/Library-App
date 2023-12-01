@@ -1,198 +1,316 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    overflow-x: hidden;
-  }
-  
-  .content {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start; 
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-  }
-  
-  .parallax {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(65deg, rgba(171, 5, 102, 0.289) 0%, rgba(1, 117, 137, 0.337) 25%, rgba(1, 143, 37, 0.389) 50%, rgba(191, 177, 25, 0.437) 75%, rgba(183, 16, 111, 0.408) 100%);
-    background-size: 200% 200%;
-    animation: gradient-animation 6s ease infinite;    
-    z-index: -1;
-  }
-
-  @keyframes gradient-animation {
-    0% {
-      background-position: 100% 0;
-    }
-    50% {
-      background-position: 0 100%;
-    }
-    100% {
-      background-position: 100% 0;
-    }
-  }
-
-.book{
-    width: 40vw;
-    color: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    cursor: pointer;
-    transition: .2s linear;
-    background-color: rgba(255, 255, 255, 0.526);
+body,
+html {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
 }
 
-.book:hover{
-    border: 1px solid azure;
-    box-shadow: 0px 0px 10px 0px azure;
+* {
+  font-family: 'Josefin Sans', sans-serif;
+  user-select: none;
 }
 
-.ReadToggleButton{
-    width: 100px;
-    height: 50px;
+i {
+  font-size: 20px;
+  color: white;
 }
 
-.buttonContainer{
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+span {
+  font-size: 1.5rem;
+  color: burlywood;
+}
+
+.toggleReadBtn {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  color: burlywood;
+  font-size: 1.5rem;
+}
+
+.toggleReadBtn:hover {
+  color: burlywood;
+  background-color: transparent;
+  transform: scale(1.1);
+}
+
+.toggleReadBtn:focus {
+  outline: none;
+  color: burlywood;
+  transform: scale(1.1);
+}
+
+.toggleReadBtn:active {
+  color: burlywood;
+  transform: scale(0.8);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: 600;
+  margin-bottom: 50px;
+  text-shadow: 0px 5px 25px rgb(255, 182, 86);
+}
+
+.parallax {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    65deg,
+    rgb(147, 84, 1) 0%,
+    rgb(78, 45, 3) 25%,
+    rgb(57, 32, 0) 50%,
+    rgb(19, 11, 0) 75%,
+    rgb(226, 128, 1) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-animation 6s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.book {
+  width: 40vw;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  transition: 0.2s linear;
+  background-color: rgba(255, 255, 255, 0.526);
+}
+
+.book:hover {
+  border: 1px solid azure;
+  box-shadow: 0px 0px 10px 0px azure;
+}
+
+.ReadToggleButton {
+  width: 100px;
+  height: 50px;
+  background-color: burlywood;
+}
+
+.ReadToggleButton:hover {
+  transform: scale(1.1);
+}
+
+.ReadToggleButton:focus {
+  outline: none;
+  transform: scale(1.1);
+}
+
+.ReadToggleButton:active {
+  transform: scale(0.8);
+}
+
+.buttonContainer {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 button {
-    border-radius: 5px;
-    border: none;
-    background-color: #4caf50; /* Green */
-    color: white;
-    width: 200px;
-    height: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+  border-radius: 5px;
+  border: none;
+  background-color: #4caf50; /* Green */
+  color: white;
+  width: 200px;
+  height: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  background-color: #3e8e41; /* Even darker green */
+  transform: translateY(1px);
+}
+
+.RemoveButton {
+  width: 50px;
+  height: 50px;
+  background-color: burlywood;
+}
+
+.RemoveButton:hover {
+  background-color: rgb(154, 0, 0);
+  transform: scale(1.1);
+}
+
+.RemoveButton:focus {
+  outline: none;
+  background-color: rgb(154, 0, 0);
+  transform: scale(1.1);
+}
+
+.RemoveButton:active {
+  background-color: red;
+  transform: scale(0.2);
+}
+
+form {
+  color: black;
+  position: absolute;
+  top: 10vh;
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  justify-content: center;
+  padding: 15px;
+  align-items: center;
+  background-color: rgba(71, 71, 71, 0.947);
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.573);
+  color: white;
+}
+
+fieldset {
+  display: flex;
+  font-size: 1.5rem;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  border: 1px solid rgba(112, 128, 144, 0.502);
+  align-items: center;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+legend {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+input {
+  border-radius: 5px;
+  outline: none;
+  border: 0px solid black;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 18px;
+  text-align: center;
+  width: 400px;
+  padding: 8px;
+  font-size: 1.5rem;
+  color: white;
+  margin-left: -2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.valid {
+  border: 2px solid green;
+}
+
+.invalid {
+  border: 2px solid red;
+}
+
+#formInfoDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formInfoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: calc(100% - 2rem);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.formSubmitBtnContainer {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+#formButton {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .content {
+    font-size: 15px;
   }
-  
-  button:hover {
-    background-color: #45a049; /* Darker green */
-  }
-  
-  button:focus {
-    outline: none;
-  }
-  
-  button:active {
-    background-color: #3e8e41; /* Even darker green */
-    transform: translateY(1px);
+
+  h1 {
+    font-size: 3rem;
   }
 
-.RemoveButton{
-    width: 50px;
-    height: 50px;
-}
-
-form{
-    color: black;
-    position: absolute;
-    top: 10vh;
-    height: auto;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-    justify-content: center;
-    padding: 15px;
-    align-items: center;
-    background-color: azure;
-    border-radius: 15px;
-}
-
-fieldset{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-legend{
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-label{
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    
-}
-
-input{
-    border-radius: 5px;
-    outline: none;
-    border: 0px solid black;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: 18px;
-    text-align: center;
-    width: 400px;
-    padding: 8px;
-}
-
-.hidden{
-    display: none;
-}
-
-.valid{
-    border: 1px solid green;
-}
-
-.invalid{
-    border: 1px solid red;
-}
-
-input[type="checkbox"] {
-    appearance: none;
-    width: 400px;
-    height: 20px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: white;
-    margin-right: 8px;
-    vertical-align: middle;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  input[type="checkbox"]:checked {
-    background-color: #66bb6a;
-    border-color: #66bb6a;
+  .book {
+    width: 80vw;
   }
 
-#formInfoDiv{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+  .buttonContainer {
+    width: 80%;
+  }
 
-.formInfoItem{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+  button {
     width: 100%;
+  }
+
+  form {
+    width: 80%;
+  }
+
+  input {
+    width: 100%;
+  }
 }

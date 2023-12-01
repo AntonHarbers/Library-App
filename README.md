@@ -15,4 +15,3 @@ Ready to dive in? Visit the [Live Link](https://antonharbers.github.io/odin-libr
 If you're as passionate about innovative web applications as I am, be sure to explore my other repositories. They're packed with equally exciting projects that showcase the limitless possibilities of coding.
 
 Stay curious, stay hungry for knowledge, and keep pushing the boundaries of technology!
-
