@@ -1,62 +1,18 @@
-body,
-html {
-  height: 100%;
-  margin: 0;
-  overflow-x: hidden;
-}
-
 * {
   font-family: 'Josefin Sans', sans-serif;
   user-select: none;
 }
 
+body,
+html {
+  height: 100%;
+  overflow-x: hidden;
+  margin: 0;
+}
+
 i {
   font-size: 20px;
   color: white;
-}
-
-span {
-  font-size: 1.5rem;
-  color: burlywood;
-}
-
-.toggleReadBtn {
-  margin-left: auto;
-  margin-right: auto;
-  background-color: transparent;
-  color: burlywood;
-  font-size: 1.5rem;
-}
-
-.toggleReadBtn:hover {
-  color: burlywood;
-  background-color: transparent;
-  transform: scale(1.1);
-}
-
-.toggleReadBtn:focus {
-  outline: none;
-  color: burlywood;
-  transform: scale(1.1);
-}
-
-.toggleReadBtn:active {
-  color: burlywood;
-  transform: scale(0.8);
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  color: white;
-  font-size: 20px;
 }
 
 h1 {
@@ -66,128 +22,9 @@ h1 {
   text-shadow: 0px 5px 25px rgb(255, 182, 86);
 }
 
-.parallax {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(
-    65deg,
-    rgb(147, 84, 1) 0%,
-    rgb(78, 45, 3) 25%,
-    rgb(57, 32, 0) 50%,
-    rgb(19, 11, 0) 75%,
-    rgb(226, 128, 1) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradient-animation 6s ease infinite;
-  z-index: -1;
-}
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 100% 0;
-  }
-  50% {
-    background-position: 0 100%;
-  }
-  100% {
-    background-position: 100% 0;
-  }
-}
-
-.book {
-  width: 40vw;
-  color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid transparent;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-  transition: 0.2s linear;
-  background-color: rgba(255, 255, 255, 0.526);
-}
-
-.book:hover {
-  border: 1px solid azure;
-  box-shadow: 0px 0px 10px 0px azure;
-}
-
-.ReadToggleButton {
-  width: 100px;
-  height: 50px;
-  background-color: burlywood;
-}
-
-.ReadToggleButton:hover {
-  transform: scale(1.1);
-}
-
-.ReadToggleButton:focus {
-  outline: none;
-  transform: scale(1.1);
-}
-
-.ReadToggleButton:active {
-  transform: scale(0.8);
-}
-
-.buttonContainer {
-  width: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-button {
-  border-radius: 5px;
-  border: none;
-  background-color: #4caf50; /* Green */
-  color: white;
-  width: 200px;
-  height: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: #45a049; /* Darker green */
-}
-
-button:focus {
-  outline: none;
-}
-
-button:active {
-  background-color: #3e8e41; /* Even darker green */
-  transform: translateY(1px);
-}
-
-.RemoveButton {
-  width: 50px;
-  height: 50px;
-  background-color: burlywood;
-}
-
-.RemoveButton:hover {
-  background-color: rgb(154, 0, 0);
-  transform: scale(1.1);
-}
-
-.RemoveButton:focus {
-  outline: none;
-  background-color: rgb(154, 0, 0);
-  transform: scale(1.1);
-}
-
-.RemoveButton:active {
-  background-color: red;
-  transform: scale(0.2);
+span {
+  font-size: 1.5rem;
+  color: burlywood;
 }
 
 form {
@@ -231,10 +68,14 @@ label {
   cursor: pointer;
 }
 
-input {
+input,
+button {
   border-radius: 5px;
+  border: none;
   outline: none;
-  border: 0px solid black;
+}
+
+input {
   background-color: rgba(255, 255, 255, 0);
   font-size: 18px;
   text-align: center;
@@ -245,8 +86,152 @@ input {
   margin-left: -2rem;
 }
 
-.hidden {
-  display: none;
+button {
+  background-color: #4caf50; /* Green */
+  color: white;
+  width: 200px;
+  height: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  background-color: #3e8e41; /* Even darker green */
+  transform: translateY(1px);
+}
+
+.toggleReadBtn {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  color: burlywood;
+  font-size: 1.5rem;
+}
+
+.toggleReadBtn:hover {
+  color: burlywood;
+  background-color: transparent;
+  transform: scale(1.1);
+}
+
+.toggleReadBtn:focus {
+  outline: none;
+  color: burlywood;
+  transform: scale(1.1);
+}
+
+.toggleReadBtn:active {
+  color: burlywood;
+  transform: scale(0.8);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+
+.parallax {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    65deg,
+    rgb(147, 84, 1) 0%,
+    rgb(78, 45, 3) 25%,
+    rgb(57, 32, 0) 50%,
+    rgb(19, 11, 0) 75%,
+    rgb(226, 128, 1) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-animation 6s ease infinite;
+  z-index: -1;
+}
+
+.book {
+  width: 40vw;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  transition: 0.2s linear;
+  background-color: rgba(255, 255, 255, 0.526);
+}
+
+.book:hover {
+  border: 1px solid azure;
+  box-shadow: 0px 0px 10px 0px azure;
+}
+
+.ReadToggleButton {
+  width: 100px;
+  height: 50px;
+  background-color: burlywood;
+}
+
+.ReadToggleButton:hover,
+.RemoveButton:hover {
+  transform: scale(1.1);
+}
+
+.ReadToggleButton:focus,
+.RemoveButton:focus {
+  outline: none;
+  transform: scale(1.1);
+}
+
+.ReadToggleButton:active,
+.RemoveButton:active {
+  transform: scale(0.8);
+}
+
+.buttonContainer {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.RemoveButton {
+  width: 50px;
+  height: 50px;
+  background-color: burlywood;
+}
+
+.RemoveButton:hover {
+  background-color: rgb(154, 0, 0);
+}
+
+.RemoveButton:focus {
+  background-color: rgb(154, 0, 0);
+}
+
+.RemoveButton:active {
+  background-color: red;
 }
 
 .valid {
@@ -255,12 +240,6 @@ input {
 
 .invalid {
   border: 2px solid red;
-}
-
-#formInfoDiv {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .formInfoItem {
@@ -285,6 +264,16 @@ input {
   margin-right: auto;
 }
 
+#formInfoDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .content {
     font-size: 15px;
@@ -298,19 +287,25 @@ input {
     width: 80vw;
   }
 
-  .buttonContainer {
-    width: 80%;
-  }
-
-  button {
-    width: 100%;
-  }
-
+  .buttonContainer,
   form {
     width: 80%;
   }
 
+  button,
   input {
     width: 100%;
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 100% 0;
   }
 }

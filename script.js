@@ -1,69 +1,24 @@
+// Variable declarations
 const formButton = document.querySelector('#formButton');
 const toggleFormButton = document.querySelector('#toggleFormButton');
 const form = document.querySelector('form');
 const bookshelf = document.getElementById('bookshelf');
-
-let myLibrary = [];
-
 const bookName = document.querySelector('#name');
 const bookNameContainer = document.querySelector('#nameContainer');
 const bookAuthor = document.querySelector('#author');
 const bookAuthorContainer = document.querySelector('#authorContainer');
 const errorMessage = document.querySelector('#errorMessage');
 const toggleReadBtn = document.querySelector('.toggleReadBtn');
-let formReadStatus = false;
 const eyeIcon = document.querySelector('.eye');
 const eyeClosedIcon = document.querySelector('.eyeClosed');
 
+// Initializations
+let myLibrary = [];
+let formReadStatus = false;
+console.log(eyeIcon.classList);
 eyeIcon.classList.add('hidden');
-toggleReadBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  formReadStatus = !formReadStatus;
-  if (formReadStatus) {
-    eyeIcon.classList.remove('hidden');
-    eyeClosedIcon.classList.add('hidden');
-  } else {
-    eyeIcon.classList.add('hidden');
-    eyeClosedIcon.classList.remove('hidden');
-  }
-});
 
-// General validation function
-function validateInput(inputElement, inputContainerElement, errorMessage) {
-  if (inputElement.validity.valid) {
-    inputContainerElement.classList.remove('invalid');
-    inputContainerElement.classList.add('valid');
-    hideError();
-  } else {
-    inputContainerElement.classList.remove('valid');
-    inputContainerElement.classList.add('invalid');
-    showError(errorMessage);
-  }
-}
-
-bookName.addEventListener('input', () => {
-  validateInput(bookName, bookNameContainer, 'Please enter a book name');
-});
-
-bookAuthor.addEventListener('input', () => {
-  validateInput(bookAuthor, bookAuthorContainer, 'Please enter an author name');
-});
-
-const showError = (message) => {
-  errorMessage.textContent = message;
-  errorMessage.classList.remove('hidden');
-};
-
-const hideError = () => {
-  errorMessage.classList.add('hidden');
-};
-
-document.addEventListener('scroll', function () {
-  const parallax = document.querySelector('.parallax');
-  let scrollPosition = window.pageYOffset;
-  parallax.style.backgroundPosition = '0' + ' ' + scrollPosition * 0.5 + 'px';
-});
-
+// Factory function for creating book objects
 function Book(title, author, pages, read) {
   (this.title = title),
     (this.author = author),
@@ -77,34 +32,90 @@ function Book(title, author, pages, read) {
   };
 }
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-  saveLibraryToLocalStorage(); // Save to local storage after adding
-  paintBookshelf();
-}
+// Event Listeners
+toggleReadBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  ToggleNewReadStatus();
+});
 
-function removeBook(index) {
-  myLibrary.splice(index, 1);
-  saveLibraryToLocalStorage(); // Save to local storage after removing
-  paintBookshelf();
-}
+bookName.addEventListener('input', () => {
+  validateInput(bookName, bookNameContainer, 'Please enter a book name');
+});
 
-function toggleReadStatus(index) {
-  myLibrary[index].read = !myLibrary[index].read;
-  saveLibraryToLocalStorage(); // Save to local storage after toggling
-  paintBookshelf();
-}
+bookAuthor.addEventListener('input', () => {
+  validateInput(bookAuthor, bookAuthorContainer, 'Please enter an author name');
+});
 
-function saveLibraryToLocalStorage() {
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-}
-
-function loadLibraryFromLocalStorage() {
-  const libraryData = localStorage.getItem('myLibrary');
-  if (libraryData) {
-    myLibrary = JSON.parse(libraryData);
+bookshelf.addEventListener('click', (e) => {
+  if (e.target.classList.contains('ReadToggleButton')) {
+    const bookIndex = e.target.parentElement.parentElement.dataset.index;
+    toggleReadStatus(bookIndex);
   }
-}
+});
+
+bookshelf.addEventListener('click', (e) => {
+  if (e.target.classList.contains('RemoveButton')) {
+    const bookIndex = e.target.parentElement.parentElement.dataset.index;
+    removeBook(bookIndex);
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (!form.classList.contains('hidden')) {
+      CloseForm();
+    }
+  }
+});
+
+toggleFormButton.addEventListener('click', () => {
+  form.classList.toggle('hidden');
+});
+
+formButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  var formData = new FormData(form);
+  hideError();
+
+  //   Validate form data
+  if (formData.get('name') === '') {
+    showError('Please enter a book name');
+    bookNameContainer.classList.remove('valid');
+    bookNameContainer.classList.add('invalid');
+    return;
+  }
+
+  if (formData.get('author') === '') {
+    showError('Please enter an author name');
+    bookAuthorContainer.classList.remove('valid');
+    bookAuthorContainer.classList.add('invalid');
+    return;
+  }
+
+  if (formData.get('pages') === '0') {
+    showError('Please enter a valid page number');
+    return;
+  }
+
+  // Reset input elements to an invalid state
+  bookNameContainer.classList.remove('valid');
+  bookNameContainer.classList.add('invalid');
+  bookAuthorContainer.classList.remove('valid');
+  bookAuthorContainer.classList.add('invalid');
+
+  addBookToLibrary(
+    formData.get('name'),
+    formData.get('author'),
+    formData.get('pages'),
+    formReadStatus
+  );
+
+  CloseForm();
+});
+
+// Helper Functions
+
 function paintBookshelf() {
   bookshelf.innerHTML = '';
   for (let i = 0; i < myLibrary.length; i++) {
@@ -145,33 +156,54 @@ function paintBookshelf() {
   }
 }
 
-// Initialize library from local storage
-loadLibraryFromLocalStorage();
-paintBookshelf();
+function addBookToLibrary(name, author, pages, read) {
+  myLibrary.push(new Book(name, author, pages, read));
+  saveLibraryToLocalStorage();
+  paintBookshelf();
+}
 
-// Event listener for read toggle buttons
-bookshelf.addEventListener('click', (e) => {
-  if (e.target.classList.contains('ReadToggleButton')) {
-    const bookIndex = e.target.parentElement.parentElement.dataset.index;
-    toggleReadStatus(bookIndex);
-  }
-});
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  saveLibraryToLocalStorage();
+  paintBookshelf();
+}
 
-// Event listener for remove buttons
-bookshelf.addEventListener('click', (e) => {
-  if (e.target.classList.contains('RemoveButton')) {
-    const bookIndex = e.target.parentElement.parentElement.dataset.index;
-    removeBook(bookIndex);
-  }
-});
+function toggleReadStatus(index) {
+  myLibrary[index].read = !myLibrary[index].read;
+  saveLibraryToLocalStorage();
+  paintBookshelf();
+}
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    if (!form.classList.contains('hidden')) {
-      CloseForm();
-    }
+function ToggleNewReadStatus() {
+  formReadStatus = !formReadStatus;
+  if (formReadStatus) {
+    eyeIcon.classList.remove('hidden');
+    eyeClosedIcon.classList.add('hidden');
+  } else {
+    eyeIcon.classList.add('hidden');
+    eyeClosedIcon.classList.remove('hidden');
   }
-});
+}
+
+const showError = (message) => {
+  errorMessage.textContent = message;
+  errorMessage.classList.remove('hidden');
+};
+
+const hideError = () => {
+  errorMessage.classList.add('hidden');
+};
+
+function saveLibraryToLocalStorage() {
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function loadLibraryFromLocalStorage() {
+  const libraryData = localStorage.getItem('myLibrary');
+  if (libraryData) {
+    myLibrary = JSON.parse(libraryData);
+  }
+}
 
 const CloseForm = () => {
   eyeIcon.classList.remove('hidden');
@@ -183,56 +215,19 @@ const CloseForm = () => {
   form.classList.toggle('hidden');
 };
 
-toggleFormButton.addEventListener('click', () => {
-  form.classList.toggle('hidden');
-});
-
-formButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  var formData = new FormData(form);
-
-  // Clear previous error messages
-  hideError();
-
-  if (formData.get('name') === '') {
-    showError('Please enter a book name');
-    bookNameContainer.classList.remove('valid');
-    bookNameContainer.classList.add('invalid');
-    return;
+// General validation function
+function validateInput(inputElement, inputContainerElement, errorMessage) {
+  if (inputElement.validity.valid) {
+    inputContainerElement.classList.remove('invalid');
+    inputContainerElement.classList.add('valid');
+    hideError();
+  } else {
+    inputContainerElement.classList.remove('valid');
+    inputContainerElement.classList.add('invalid');
+    showError(errorMessage);
   }
+}
 
-  if (formData.get('author') === '') {
-    showError('Please enter an author name');
-    bookAuthorContainer.classList.remove('valid');
-    bookAuthorContainer.classList.add('invalid');
-    return;
-  }
-
-  if (formData.get('pages') === '0') {
-    showError('Please enter a valid page number');
-    return;
-  }
-
-  // Reset input elements to an invalid state
-  bookNameContainer.classList.remove('valid');
-  bookNameContainer.classList.add('invalid');
-  bookAuthorContainer.classList.remove('valid');
-  bookAuthorContainer.classList.add('invalid');
-
-  addBookToLibrary(
-    new Book(
-      formData.get('name'),
-      formData.get('author'),
-      formData.get('pages'),
-      formReadStatus
-    )
-  );
-
-  form.reset();
-  eyeIcon.classList.remove('hidden');
-  eyeIcon.classList.add('hidden');
-  eyeClosedIcon.classList.add('hidden');
-  eyeClosedIcon.classList.remove('hidden');
-  formReadStatus = false;
-  form.classList.toggle('hidden');
-});
+// Initialize library from local storage
+loadLibraryFromLocalStorage();
+paintBookshelf();

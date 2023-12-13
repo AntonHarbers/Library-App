@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script
-      src="https://kit.fontawesome.com/61b3d69629.js"
-      crossorigin="anonymous"
-    ></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Odin Library</title>
+    <title>Library App - The Odin Project</title>
     <link rel="stylesheet" href="styles/style.css" />
+    <script src="script.js" defer></script>
+    <!-- FAVICON -->
     <link
       rel="shortcut icon"
       href="./images/favicon/favicon.ico"
       type="image/x-icon"
     />
+    <!-- FONT AWESOME -->
+    <script
+    src="https://kit.fontawesome.com/61b3d69629.js"
+    crossorigin="anonymous"
+    ></script>
+    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,7 +32,6 @@
         <i class="fas fa-plus"></i>
       </button>
       <div id="bookshelf"></div>
-
       <form id="addBookForm" class="hidden">
         <fieldset>
           <legend>Add a Book to Your Library</legend>
@@ -77,18 +80,15 @@
             </div>
           </div>
           <div class="formSubmitBtnContainer">
-
             <button type="submit" id="formButton">
               <i class="fas fa-plus"></i>
             </button>
-
           </div>
           <span id="errorMessage" class="hidden"></span>
         </fieldset>
       </form>
     </div>
+    <!-- Background Animation Applied Here -->
     <div class="parallax"></div>
-
-    <script src="script.js"></script>
   </body>
 </html>
