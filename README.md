@@ -2,7 +2,7 @@
 
 A basic digital library to keep track of your books built with html, css and javascript for the odin project.
 
-[Live Link](https://antonharbers.github.io/odin-library/)
+[Live Link](https://antonharbers.github.io/Library-App/)
 
 ![Screenshot of the Library App](/images/repoImage.png)
 
